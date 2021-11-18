@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EjercicioPOOVisual", "EjercicioPOOVisual\EjercicioPOOVisual.csproj", "{46040C10-D2A9-4E5E-8B01-410FA2D1D351}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "InstaladorCatRacer", "InstaladorCatRacer\InstaladorCatRacer.vdproj", "{ED53C195-F33A-4435-88D4-519D14BAAFA3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46040C10-D2A9-4E5E-8B01-410FA2D1D351}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{46040C10-D2A9-4E5E-8B01-410FA2D1D351}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{46040C10-D2A9-4E5E-8B01-410FA2D1D351}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46040C10-D2A9-4E5E-8B01-410FA2D1D351}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED53C195-F33A-4435-88D4-519D14BAAFA3}.Debug|Any CPU.ActiveCfg = Debug
+		{ED53C195-F33A-4435-88D4-519D14BAAFA3}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F0140392-A9FA-40BF-A7BE-1D999E55C679}
+	EndGlobalSection
+EndGlobal
