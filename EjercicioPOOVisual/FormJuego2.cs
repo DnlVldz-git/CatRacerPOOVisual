@@ -77,8 +77,7 @@ namespace EjercicioPOOVisual
                 this.lblPerdio.Visible = true;
                 this.lblGatoGanador.Text = juego.GetGanador();
                 this.lblDinero.Text = (imp.GetUsuarioActual().getCantidad()).ToString();
-            }            
-            imp.GuardarUsuarios();            
+            }                            
             daoCu.updateCuenta(numCuenta, this.cuentaTemp);
         }
 
@@ -100,8 +99,7 @@ namespace EjercicioPOOVisual
                 this.lblPerdio.Visible = true;
                 this.lblGatoGanador.Text = juego.GetGanador();
                 this.lblDinero.Text = (imp.GetUsuarioActual().getCantidad()).ToString();
-            }
-            imp.GuardarUsuarios();            
+            }            
             daoCu.updateCuenta(numCuenta, this.cuentaTemp);
         }
 
@@ -149,8 +147,7 @@ namespace EjercicioPOOVisual
                 this.lblPerdio.Visible = true;
                 this.lblGatoGanador.Text = juego.GetGanador();
                 this.lblDinero.Text = (imp.GetUsuarioActual().getCantidad()).ToString();
-            }
-            imp.GuardarUsuarios();            
+            }            
             daoCu.updateCuenta(numCuenta, this.cuentaTemp);
         }
 

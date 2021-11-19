@@ -16,8 +16,7 @@ namespace EjercicioPOOVisual
     {
         public FormJuego()
         {
-            InitializeComponent();
-            Implementación imp = Implementación.Instance;
+            InitializeComponent();            
             fillComboBx();
             GC.Collect();
         }

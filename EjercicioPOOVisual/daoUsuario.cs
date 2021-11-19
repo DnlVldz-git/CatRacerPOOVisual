@@ -20,9 +20,9 @@ namespace EjercicioPOOVisual
             try
             {
                 conexion.Open();
-                SqlCommand comando = new SqlCommand("insert into Usuario values(@id ,@nombre, @contra, @tipo, @cantidadApuesta, @sexo, @edad)",
-                    conexion);
-                comando.Parameters.Add("@id", SqlDbType.Int).Value = usuario.GetId();
+                SqlCommand comando = new SqlCommand("insert into Usuario values(@nombre," +
+                    " @contra, @tipo, @cantidadApuesta, @sexo, @edad)",
+                    conexion);                
                 comando.Parameters.Add("@nombre", SqlDbType.VarChar).Value = usuario.getNombre();
                 comando.Parameters.Add("@contra", SqlDbType.VarChar).Value = usuario.getContra();
                 comando.Parameters.Add("@tipo", SqlDbType.VarChar).Value = usuario.getTipo();
@@ -160,15 +160,35 @@ namespace EjercicioPOOVisual
             {
                 conexion.Open();
 
-                SqlCommand comando = new SqlCommand("update Usuario " +
+                SqlCommand comando = null;
+
+                if (usuario.getContra() == "a_")
+                {
+                    comando = new SqlCommand("update Usuario " +
+                    "set nombre= @nombre, sexo= @sexo, edad = @edad " +
+                    "where id = " + id,
+                    conexion);
+
+                    comando.Parameters.Add("@nombre", SqlDbType.VarChar).Value = usuario.getNombre();                    
+                    comando.Parameters.Add("@sexo", SqlDbType.VarChar).Value = usuario.getSexo();
+                    comando.Parameters.Add("@edad", SqlDbType.Int).Value = usuario.getEdad();
+                }
+                else
+                {
+                    comando = new SqlCommand("update Usuario " +
                     "set nombre= @nombre, contraseña= @contra, sexo= @sexo, edad = @edad " +
                     "where id = " + id,
                     conexion);
 
-                comando.Parameters.Add("@nombre", SqlDbType.VarChar).Value = usuario.getNombre();
-                comando.Parameters.Add("@contra", SqlDbType.VarChar).Value = usuario.getContra();
-                comando.Parameters.Add("@sexo", SqlDbType.VarChar).Value = usuario.getSexo();
-                comando.Parameters.Add("@edad", SqlDbType.Int).Value = usuario.getEdad();
+
+
+                    comando.Parameters.Add("@nombre", SqlDbType.VarChar).Value = usuario.getNombre();
+                    comando.Parameters.Add("@contra", SqlDbType.VarChar).Value = usuario.getContra();
+                    comando.Parameters.Add("@sexo", SqlDbType.VarChar).Value = usuario.getSexo();
+                    comando.Parameters.Add("@edad", SqlDbType.Int).Value = usuario.getEdad();
+
+                }
+
 
                 int valor = comando.ExecuteNonQuery();
 

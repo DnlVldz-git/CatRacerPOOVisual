@@ -101,14 +101,11 @@ namespace EjercicioPOOVisual
                 else
                 {
                     daoCu.deleteCuentaWithId(usss.GetId());
-                    daoUs.deleteUsuario(usss.GetId());
-                    Implementación.Instance.GetUsuarios().Remove(usss);                    
+                    daoUs.deleteUsuario(usss.GetId());                    
                     this.tableAdapter.Update(dataSet.Usuario);
                     gridView1.Rows.Remove(row);
                 }                
-            }
-            Implementación.Instance.GuardarUsuarios();
-            
+            }                        
         }
 
         private void AbrirFormEnPanel(Object Formhijo)
@@ -134,38 +131,28 @@ namespace EjercicioPOOVisual
         {
             try
             {
-                int res = 0;
-
-                int num = 0;
-                while (res == 0)
+                
+                if (textBox1.Text != "" && textBox2.Text != "" && textBox3.Text != "" && comboBox1.SelectedIndex != -1 && Convert.ToInt32( textBox3.Text) >= 18)
                 {
-                    Random rnd = new Random();
-
-                    num = rnd.Next(50);
+                    DataRow fila = dataSet.Usuario.NewRow();                    
+                    String nombre = textBox1.Text;
+                    String contra = Encriptar.GetMD5(textBox2.Text);                    
+                    String tipo = "pendiente";
+                    String sexo = comboBox1.SelectedItem.ToString();
+                    int edad = Convert.ToInt32(textBox3.Text);
 
                     daoUsuario daoUs = new daoUsuario();
 
-                    daoUs.EstaUsuario(num);
-                    if (!daoUs.EstaUsuario(num))
-                    {
-                        res = 1;
-                    }
-                }
-                if (textBox1.Text != "" && textBox2.Text != "" && textBox3.Text != "" && comboBox1.SelectedIndex != -1 && Convert.ToInt32( textBox3.Text) >= 18)
-                {
-                    DataRow fila = dataSet.Usuario.NewRow();
-                    fila["Id"] = num;
-                    fila["Nombre"] = textBox1.Text;
-                    fila["Contraseña"] = Encriptar.GetMD5(textBox2.Text);
-                    fila["cantidadApuesta"] = 0;
-                    fila["tipo"] = "pendiente";
-                    fila["sexo"] = comboBox1.SelectedItem;
-                    fila["edad"] = textBox3.Text;
+                    Usuario us = new Usuario(0, 0.0, nombre, sexo, edad);
+                    us.setContra(contra);
+                    us.DefinirTipo(0);
 
-                    dataSet.Usuario.Rows.Add(fila);
-                    this.tableAdapter.Update(dataSet.Usuario);
-                    MessageBox.Show("Éxito al registrar");
-                    this.tableAdapter.Update(dataSet.Usuario);
+                    daoUs.insertUsuario(us);
+
+                    dataSet.Clear();
+                    this.obtenerUsuarios();
+
+                    MessageBox.Show("Éxito al registrar");                    
                     LimpiarCampos();
                 }
                 else if (Convert.ToInt32(textBox3.Text) <18 || Convert.ToInt32(textBox3.Text) <=-1)
@@ -378,7 +365,7 @@ namespace EjercicioPOOVisual
             {
                 conexion.Open();
                 SqlCommand comando = new SqlCommand("select * from Usuario", conexion);
-                tableAdapter = new SqlDataAdapter(comando);                
+                tableAdapter = new SqlDataAdapter(comando);
                 dataSet = new CatRacerBDDataSet();
 
                 tableAdapter.Fill(dataSet);
@@ -439,8 +426,12 @@ namespace EjercicioPOOVisual
 
         private void button6_Click(object sender, EventArgs e)
         {
-            try {
-
+            try {                
+                if (gridView1.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show("No hay nada que actualizar");
+                    return;
+                }                
                 int a = Convert.ToInt32(textBox3.Text);
                 if (textBox1.Text != "" && textBox2.Text != "" && textBox3.Text != "" && comboBox1.SelectedIndex != -1)
                 {
@@ -455,14 +446,30 @@ namespace EjercicioPOOVisual
                     int id = Convert.ToInt32(id_);
                     
                     String nom = textBox1.Text;
-                    String contra = Encriptar.GetMD5(textBox2.Text);
+
+                    
+                    
+
+                    
                     Double cant = 0;
                     String tipo = "pendiente";
                     String sexo = comboBox1.SelectedItem.ToString();
                     int edad = Convert.ToInt32(textBox3.Text);
 
                     Usuario us = new Usuario(0, 0.0, nom, sexo, edad);
-                    us.setContra(contra);
+
+                    MessageBox.Show(textBox2.Text.Length.ToString());
+
+                    if (textBox2.Text.Length != 32)
+                    {
+                        String contra = Encriptar.GetMD5(textBox2.Text);
+                        us.setContra(contra);
+                    }
+                    else
+                    {
+                        us.setContra("a_");
+                    }
+                    
 
                     daoUs.updateUsuario(id, us);
                     dataSet.Clear();

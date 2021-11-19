@@ -72,11 +72,12 @@ namespace EjercicioPOOVisual
                     "set dineroInvertido = @dineroInvertido, dineroGanado = @dineroGanado, dineroPerdido = @dineroPerdido, dineroTotal = @dineroTotal " +
                     "where id = " + id,
                     conexion);
+                cuenta.calcularDineroTotal();
 
                 comando.Parameters.Add("@dineroInvertido", SqlDbType.Decimal).Value = cuenta.DineroInvertido;
                 comando.Parameters.Add("@dineroGanado", SqlDbType.Decimal).Value = cuenta.DineroGanado;
-                comando.Parameters.Add("@dineroPerdido", SqlDbType.Decimal).Value = cuenta.DineroPerdido;
-                comando.Parameters.Add("@dineroTotal", SqlDbType.Decimal).Value = cuenta.DineroPerdido;
+                comando.Parameters.Add("@dineroPerdido", SqlDbType.Decimal).Value = cuenta.DineroPerdido;                
+                comando.Parameters.Add("@dineroTotal", SqlDbType.Decimal).Value = cuenta.GetDineroTotal();
 
                 int valor = comando.ExecuteNonQuery();
 
